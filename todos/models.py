@@ -8,7 +8,11 @@ class ToDo(models.Model):
     important = models.BooleanField(default=False)
     urgent = models.BooleanField(default=False)
     due_date = models.DateField()
-    creator = models.CharField(max_length=200)
+    completed = models.BooleanField(default=False)
+    creator = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return self.title

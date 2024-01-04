@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Post Detail{% endblock title %}
+
+{% block content %}
+<div>
+    <h3>{{ todo.title }}</h3>
+    <p>{{ todo.details }}</p>
+    <p>Important? {{ todo.important }}</p>
+    <p>Urgent? {{ todo.urgent }}</p>
+    <p>Due: {{ todo.due_date }}</p>
+    <p>Completed? {{ todo.completed }}</p>
+    <p>Created by: {{ todo.creator }}</p>
+</div>
+<a href="{% url 'todo_edit' todo.pk %}">Edit ToDo</a> |
+<a href="{% url 'todo_delete' todo.pk %}">Delete ToDo</a> |
+<a href="{% url 'todo_list' %}">Back to ToDo List</a>
+{% endblock content %}

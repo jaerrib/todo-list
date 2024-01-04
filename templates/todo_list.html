@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}ToDo List{% endblock title%}
+
+{% block content %}
+<h2>ToDo List</h2>
+<a href="{% url 'home' %}">Home</a>
+{% for todo in todo_list %}
+<div>
+    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
+</div>
+{% endfor %}
+<a href="{% url 'todo_new' %}">New ToDo</a>
+{% endblock content %}
