@@ -4,47 +4,60 @@
 
 {% block content %}
 <h2>ToDo List</h2>
-<a href="{% url 'home' %}">Home</a>
-<hr>
-<h3>Do</h3>
-{% for todo in todo_list %}
-{% if todo.important and todo.urgent %}
-<div>
-    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
-</div>
-{% endif %}
-{% endfor %}
 
-<hr>
-<h3>Schedule</h3>
-{% for todo in todo_list %}
-{% if todo.important and not todo.urgent %}
-<div>
-    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
-</div>
-{% endif %}
-{% endfor %}
+<div class="">
 
-<hr>
-<h3>Delegate</h3>
-{% for todo in todo_list %}
-{% if not todo.important and todo.urgent %}
-<div>
-    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
-</div>
-{% endif %}
-{% endfor %}
+    <div class="row">
+        <div class="card col-5 p-3 m-3 shadow">
+            <h3 class="text-success">Do</h3>
+            <ul>
+                {% for todo in todo_list %}
+                {% if todo.important and todo.urgent %}
+                <li><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
+                    }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card col-5 p-3 m-3 shadow">
+            <h3 class="text-warning">Delegate</h3>
+            {% for todo in todo_list %}
+            {% if not todo.important and todo.urgent %}
+            <ul>
+                <li><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
+                    }}</a></li>
+            </ul>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 
-<hr>
-<h3>Delete</h3>
-{% for todo in todo_list %}
-{% if not todo.important and not todo.urgent %}
-<div>
-    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
+    <div class="row">
+        <div class="card col-5 p-3 m-3 shadow">
+            <h3 class="text-primary">Schedule</h3>
+            {% for todo in todo_list %}
+            {% if todo.important and not todo.urgent %}
+            <ul>
+                <li>
+                    <a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
+                        }}</a>
+                </li>
+            </ul>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="card col-5 p-3 m-3 shadow">
+            <h3 class="text-danger">Delete</h3>
+            {% for todo in todo_list %}
+            {% if not todo.important and not todo.urgent %}
+            <ul>
+                <li><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
+                    }}</a></li>
+            </ul>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 </div>
-{% endif %}
-{% endfor %}
 
-<hr>
-<a href="{% url 'todo_new' %}">New ToDo</a>
 {% endblock content %}
