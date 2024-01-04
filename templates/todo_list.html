@@ -5,10 +5,46 @@
 {% block content %}
 <h2>ToDo List</h2>
 <a href="{% url 'home' %}">Home</a>
+<hr>
+<h3>Do</h3>
 {% for todo in todo_list %}
+{% if todo.important and todo.urgent %}
 <div>
     <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
 </div>
+{% endif %}
 {% endfor %}
+
+<hr>
+<h3>Schedule</h3>
+{% for todo in todo_list %}
+{% if todo.important and not todo.urgent %}
+<div>
+    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
+</div>
+{% endif %}
+{% endfor %}
+
+<hr>
+<h3>Delegate</h3>
+{% for todo in todo_list %}
+{% if not todo.important and todo.urgent %}
+<div>
+    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
+</div>
+{% endif %}
+{% endfor %}
+
+<hr>
+<h3>Delete</h3>
+{% for todo in todo_list %}
+{% if not todo.important and not todo.urgent %}
+<div>
+    <h3><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></h3>
+</div>
+{% endif %}
+{% endfor %}
+
+<hr>
 <a href="{% url 'todo_new' %}">New ToDo</a>
 {% endblock content %}
