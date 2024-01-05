@@ -3,59 +3,86 @@
 {% block title %}ToDo List{% endblock title%}
 
 {% block content %}
+
 <h2>ToDo List</h2>
 
-<div class="">
-
-    <div class="row">
-        <div class="card col-5 p-3 m-3 shadow">
-            <h3 class="text-success">Do</h3>
-            <ul>
+<div class="row">
+    <div class="card col-5 m-3 bg-body-tertiary">
+        <div class="card-body">
+            <h3 class="card-title mb-3 fw-bold text-success">Do:</h3>
+            <p class="card-subtitle text-secondary-emphasis">Important
+                and urgent</p>
+            <hr>
+            <div class="d-grid gap-1">
                 {% for todo in todo_list %}
                 {% if todo.important and todo.urgent %}
-                <li><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
-                    }}</a></li>
+                <a href="{% url 'todo_detail' todo.pk %}" type="button"
+                   class="btn btn-success mb-3 shadow">
+                    {{ todo.title }}
+                </a>
                 {% endif %}
                 {% endfor %}
-            </ul>
-        </div>
-        <div class="card col-5 p-3 m-3 shadow">
-            <h3 class="text-warning">Delegate</h3>
-            {% for todo in todo_list %}
-            {% if not todo.important and todo.urgent %}
-            <ul>
-                <li><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
-                    }}</a></li>
-            </ul>
-            {% endif %}
-            {% endfor %}
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="card col-5 p-3 m-3 shadow">
-            <h3 class="text-primary">Schedule</h3>
-            {% for todo in todo_list %}
-            {% if todo.important and not todo.urgent %}
-            <ul>
-                <li>
-                    <a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
-                        }}</a>
-                </li>
-            </ul>
-            {% endif %}
-            {% endfor %}
+    <div class="card col-5 m-3 bg-body-tertiary">
+        <div class="card-body">
+            <h3 class="card-title mb-3 fw-bold text-warning">Schedule:</h3>
+            <p class="card-subtitle text-secondary-emphasis">Important but not
+                urgent</p>
+            <hr>
+            <div class="d-grid gap-1">
+                {% for todo in todo_list %}
+                {% if todo.important and not todo.urgent %}
+                <a href="{% url 'todo_detail' todo.pk %}" type="button"
+                   class="btn btn-warning mb-3 shadow">
+                    {{ todo.title }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-        <div class="card col-5 p-3 m-3 shadow">
-            <h3 class="text-danger">Delete</h3>
-            {% for todo in todo_list %}
-            {% if not todo.important and not todo.urgent %}
-            <ul>
-                <li><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title
-                    }}</a></li>
-            </ul>
-            {% endif %}
-            {% endfor %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="card col-5 m-3 bg-body-tertiary">
+        <div class="card-body">
+            <h3 class="card-title mb-3 fw-bold text-primary">Delegate:</h3>
+            <p class="card-subtitle text-secondary-emphasis">Not important
+                but urgent</p>
+            <hr>
+            <div class="d-grid gap-1">
+                {% for todo in todo_list %}
+                {% if todo.important and todo.urgent %}
+                <a href="{% url 'todo_detail' todo.pk %}" type="button"
+                   class="btn btn-primary mb-3 shadow">
+                    {{ todo.title }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-5 m-3 bg-body-tertiary">
+        <div class="card-body">
+            <h3 class="card-title mb-3 fw-bold text-danger">Eliminate</h3>
+            <p class="card-subtitle text-secondary-emphasis">Not important
+                and not urgent</p>
+            <hr>
+            <div class="d-grid gap-1">
+                {% for todo in todo_list %}
+                {% if not todo.important and not todo.urgent %}
+                <a href="{% url 'todo_detail' todo.pk %}" type="button"
+                   class="btn btn-danger mb-3 shadow"
+                   data-bs-toggle="modal"
+                   data-bs-target="#{{todo.pk}}">{{ todo.title }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
