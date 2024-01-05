@@ -4,10 +4,10 @@ from django.urls import reverse
 
 class ToDo(models.Model):
     title = models.CharField(max_length=200)
-    details = models.TextField()
+    details = models.TextField(blank=True, null=True)
     important = models.BooleanField(default=False)
     urgent = models.BooleanField(default=False)
-    due_date = models.DateField()
+    due_date = models.DateField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     creator = models.ForeignKey(
         "auth.User",
