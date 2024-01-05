@@ -25,9 +25,9 @@
                     <li>
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
-                            <a href="{% url 'password_change' %}">Change Password</a>
-                            <input type="submit" value="Log Out">
-                    </form>
+                            <a class="btn btn-link" role="button" href="{% url 'password_change' %}">Change Password</a>
+                            <button type="submit" class="btn btn-link" >Log Out</button>
+                        </form>
                     </li>
                 </ul>
             </div>
