@@ -22,7 +22,11 @@ class ToDoDetailView(DetailView):
 class ToDoCreateView(CreateView):
     model = ToDo
     template_name = "todo_new.html"
-    fields = ["title", "details", "important", "urgent", "due_date", "creator"]
+    fields = ["title", "details", "important", "urgent", "due_date"]
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 
 class ToDoUpdateView(UpdateView):
