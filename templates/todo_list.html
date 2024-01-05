@@ -55,7 +55,7 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
-                {% if todo.important and todo.urgent %}
+                {% if not todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-primary mb-3 shadow">
                     {{ todo.title }}
