@@ -8,8 +8,9 @@
 <form action="" method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" value="Update">
+    <button type="submit" class="btn btn-success">Update</button>
 </form>
+<hr class="mt-3 mb-3">
 <a href="{% url 'todo_detail' todo.pk %}">Back to ToDo Detail</a> |
 <a href="{% url 'todo_list' %}">Back to ToDo List</a>
 {% endblock content %}

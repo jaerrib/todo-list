@@ -44,6 +44,7 @@ class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         "urgent",
         "due_date",
     ]
+    success_url = "todo_list"
 
     def test_func(self):
         obj = self.get_object()
@@ -54,6 +55,18 @@ class TodoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = ToDo
     template_name = "todo_delete.html"
     success_url = reverse_lazy("todo_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
+
+
+class ToDoCompleteView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ToDo
+    template_name = "todo_complete.html"
+    fields = [
+        "completed",
+    ]
 
     def test_func(self):
         obj = self.get_object()

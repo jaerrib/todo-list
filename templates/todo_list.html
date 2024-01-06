@@ -15,11 +15,13 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
+                {% if not todo.completed %}
                 {% if todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-success mb-3 shadow">
                     {{ todo.title }}
                 </a>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>
@@ -34,11 +36,13 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
+                {% if not todo.completed %}
                 {% if todo.important and not todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-warning mb-3 shadow">
                     {{ todo.title }}
                 </a>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>
@@ -55,11 +59,13 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
+                {% if not todo.completed %}
                 {% if not todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-primary mb-3 shadow">
                     {{ todo.title }}
                 </a>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>
@@ -74,12 +80,14 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
+                {% if not todo.completed %}
                 {% if not todo.important and not todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-danger mb-3 shadow"
                    data-bs-toggle="modal"
                    data-bs-target="#{{todo.pk}}">{{ todo.title }}
                 </a>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>

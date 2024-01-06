@@ -3,16 +3,26 @@
 {% block title %}Post Detail{% endblock title %}
 
 {% block content %}
-<div>
-    <h3>{{ todo.title }}</h3>
-    <p>{{ todo.details }}</p>
-    <p>Important? {{ todo.important }}</p>
-    <p>Urgent? {{ todo.urgent }}</p>
-    <p>Due: {{ todo.due_date }}</p>
-    <p>Completed? {{ todo.completed }}</p>
-    <p>Created by: {{ todo.creator }}</p>
+<div class="card bg-body-tertiary">
+    <div class="card-header">
+        <h3>{{ todo.title }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="card-body">
+            <p class="card-text">{{ todo.details }}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Important? {{ todo.important }}</li>
+                <li class="list-group-item">Urgent? {{ todo.urgent }}</li>
+                <li class="list-group-item">Due Date: {{ todo.due_date }}</li>
+                <li class="list-group-item">Completed? {{ todo.completed }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'todo_complete' todo.pk %}">Complete ToDo</a> |
+        <a href="{% url 'todo_edit' todo.pk %}">Edit ToDo</a> |
+        <a href="{% url 'todo_delete' todo.pk %}">Delete ToDo</a> |
+        <a href="{% url 'todo_list' %}">Back to ToDo List</a>
+    </div>
 </div>
-<a href="{% url 'todo_edit' todo.pk %}">Edit ToDo</a> |
-<a href="{% url 'todo_delete' todo.pk %}">Delete ToDo</a> |
-<a href="{% url 'todo_list' %}">Back to ToDo List</a>
 {% endblock content %}

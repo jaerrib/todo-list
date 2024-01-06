@@ -1,13 +1,15 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
-{% block title %}Delete ToDo Item{% endblock title %}
+{% block title %}Complete ToDo Item{% endblock title %}
 
 {% block content %}
-<h2>Delete ToDo</h2>
+<h2>Complete ToDo</h2>
+<p>Check to complete {{ todo_title }}</p>
 <form action="" method="post">
     {% csrf_token %}
-    <p>Are you sure you want to delete "{{ todo.title }}"?</p>
-    <button type="submit" class="btn btn-success">Confirm</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Update</button>
 </form>
 <hr class="mt-3 mb-3">
 <a href="{% url 'todo_detail' todo.pk %}">Back to ToDo Detail</a> |
