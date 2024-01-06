@@ -12,13 +12,20 @@
             <p class="card-text">ToDo Details: {{ todo.details }}</p>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Due Date: {{ todo.due_date }}</li>
+
                 {% if todo.important %}
-                <li class="list-group-item">Important? {{ todo.important }}</li>
+                <li class="list-group-item fw-bold">Important</li>
                 {% endif %}
+
                 {% if todo.urgent %}
                 <li class="list-group-item fw-bold">Urgent</li>
                 {% endif %}
-                <li class="list-group-item">Completed? {{ todo.completed }}</li>
+
+                {% if todo.completed %}
+                <li class="list-group-item">Completed</li>
+                {% else %}
+                <li class="list-group-item fw-bold">Incomplete</li>
+                {% endif %}
             </ul>
         </div>
     </div>

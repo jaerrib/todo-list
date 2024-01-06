@@ -95,4 +95,21 @@
     </div>
 </div>
 
+<hr class="m-3">
+<div class="row">
+    <h2 class="text-secondary">Completed ToDos</h2>
+    <div class="d-flex d-block mt-3">
+
+        {% for todo in todo_list %}
+        {% if todo.completed %}
+
+        <a href="{% url 'todo_detail' todo.pk %}" type="button"
+           class="btn btn-outline-secondary btn me-3 mb-3">{{ todo.title }}</a>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
 {% endblock content %}
