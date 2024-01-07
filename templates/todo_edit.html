@@ -4,7 +4,7 @@
 {% block title %}Edit ToDo Item{% endblock title %}
 
 {% block content %}
-<h2>Edit ToDo</h2>
+<h1>Edit ToDo</h1>
 <form action="" method="post">
     {% csrf_token %}
     {{ form|crispy }}
