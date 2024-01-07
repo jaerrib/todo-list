@@ -1,0 +1,7 @@
+.vencv/
+__pycache__/
+*.sqlite3
+.gitignore
+.env
+.idea
+fly.toml
