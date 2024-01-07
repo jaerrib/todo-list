@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from .forms import ToDoCreateForm, ToDoUpdateForm
 from .models import ToDo
 
 
@@ -27,8 +28,8 @@ class ToDoDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
 class ToDoCreateView(LoginRequiredMixin, CreateView):
     model = ToDo
+    form_class = ToDoCreateForm
     template_name = "todo_new.html"
-    fields = ["title", "details", "important", "urgent", "due_date"]
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -37,15 +38,9 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
 
 class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ToDo
+    form_class = ToDoUpdateForm
     template_name = "todo_edit.html"
-    fields = [
-        "title",
-        "details",
-        "important",
-        "urgent",
-        "due_date",
-    ]
-    success_url = "todo_list"
+    success_url = reverse_lazy("todo_list")
 
     def test_func(self):
         obj = self.get_object()

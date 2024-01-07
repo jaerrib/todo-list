@@ -8,9 +8,12 @@
 <form action="" method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a class="btn btn-secondary" href="{% url 'todo_detail' todo.pk %}">
+        Cancel
+    </a>
+    <a class="btn btn-outline-secondary" href="{% url 'todo_list' %}">Back
+        to ToDo List
+    </a>
 </form>
-<hr class="mt-3 mb-3">
-<a href="{% url 'todo_detail' todo.pk %}">Back to ToDo Detail</a> |
-<a href="{% url 'todo_list' %}">Back to ToDo List</a>
 {% endblock content %}
