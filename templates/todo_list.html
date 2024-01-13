@@ -15,7 +15,7 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
-                {% if not todo.completed and user == todo.creator %}
+                {% if not todo.completed %}
                 {% if todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-success mb-3 shadow">
@@ -36,7 +36,7 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
-                {% if not todo.completed and user == todo.creator %}
+                {% if not todo.completed %}
                 {% if todo.important and not todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-warning mb-3 shadow">
@@ -59,7 +59,7 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
-                {% if not todo.completed and user == todo.creator %}
+                {% if not todo.completed %}
                 {% if not todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-primary mb-3 shadow">
@@ -80,7 +80,7 @@
             <hr>
             <div class="d-grid gap-1">
                 {% for todo in todo_list %}
-                {% if not todo.completed and user == todo.creator %}
+                {% if not todo.completed %}
                 {% if not todo.important and not todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
                    class="btn btn-danger mb-3 shadow"
@@ -101,7 +101,7 @@
     <div class="d-flex d-block mt-3">
 
         {% for todo in todo_list %}
-        {% if todo.completed and user == todo.creator %}
+        {% if todo.completed %}
 
         <a href="{% url 'todo_detail' todo.pk %}" type="button"
            class="btn btn-outline-secondary btn me-3 mb-3">{{ todo.title }}</a>

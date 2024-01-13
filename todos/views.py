@@ -16,6 +16,9 @@ class ToDoListView(LoginRequiredMixin, ListView):
     model = ToDo
     template_name = "todo_list.html"
 
+    def get_queryset(self):
+        return ToDo.objects.filter(creator=self.request.user.pk)
+
 
 class ToDoDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = ToDo
@@ -58,8 +61,6 @@ class TodoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def todo_complete(request, pk):
-    for key, value in request.session.items():
-        print("{} => {}".format(key, value))
     if "_auth_user_id" not in request.session:
         return redirect("/")
     model = ToDo.objects.get(pk=pk)
@@ -72,8 +73,6 @@ def todo_complete(request, pk):
 
 
 def todo_reactivate(request, pk):
-    for key, value in request.session.items():
-        print("{} => {}".format(key, value))
     if "_auth_user_id" not in request.session:
         return redirect("/")
     model = ToDo.objects.get(pk=pk)
