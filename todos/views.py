@@ -33,6 +33,7 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     model = ToDo
     form_class = ToDoCreateForm
     template_name = "todo_new.html"
+    success_url = reverse_lazy("todo_list")
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -69,7 +70,7 @@ def todo_complete(request, pk):
     else:
         model.completed = True
         model.save()
-        return redirect("todo_detail", pk=pk)
+        return redirect("todo_list")
 
 
 def todo_reactivate(request, pk):
@@ -81,4 +82,4 @@ def todo_reactivate(request, pk):
     else:
         model.completed = False
         model.save()
-        return redirect("todo_detail", pk=pk)
+        return redirect("todo_list")
