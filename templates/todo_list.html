@@ -7,9 +7,10 @@
 <h1>ToDo List</h1>
 
 <div class="row">
-    <div class="card col-11 col-md-5 m-3 bg-body-tertiary">
+    <div class="card col-11 p-0 col-md-5 m-3 bg-body-tertiary">
+        <h2 class="card-header mb-3 fw-bold text-bg-success">
+            Do:</h2>
         <div class="card-body">
-            <h2 class="card-title mb-3 fw-bold text-success">Do:</h2>
             <p class="card-subtitle text-secondary-emphasis">Important
                 and urgent</p>
             <hr>
@@ -18,7 +19,7 @@
                 {% if not todo.completed %}
                 {% if todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
-                   class="btn btn-success mb-3 shadow">
+                   class="btn btn-outline-dark mb-3 shadow">
                     {{ todo.title }}
                 </a>
                 {% endif %}
@@ -28,9 +29,10 @@
         </div>
     </div>
 
-    <div class="card col-11 col-md-5 m-3 bg-body-tertiary">
+    <div class="card col-11 p-0 col-md-5 m-3 bg-body-tertiary">
+        <h2 class="card-header mb-3 fw-bold text-bg-warning">
+            Schedule:</h2>
         <div class="card-body">
-            <h2 class="card-title mb-3 fw-bold text-warning">Schedule:</h2>
             <p class="card-subtitle text-secondary-emphasis">Important but not
                 urgent</p>
             <hr>
@@ -39,7 +41,7 @@
                 {% if not todo.completed %}
                 {% if todo.important and not todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
-                   class="btn btn-warning mb-3 shadow">
+                   class="btn btn-outline-dark mb-3 shadow">
                     {{ todo.title }}
                 </a>
                 {% endif %}
@@ -51,9 +53,10 @@
 </div>
 
 <div class="row">
-    <div class="card col-11 col-md-5 m-3 bg-body-tertiary">
+    <div class="card col-11 p-0 col-md-5 m-3 bg-body-tertiary">
+        <h2 class="card-header mb-3 fw-bold text-bg-primary">
+            Delegate:</h2>
         <div class="card-body">
-            <h2 class="card-title mb-3 fw-bold text-primary">Delegate:</h2>
             <p class="card-subtitle text-secondary-emphasis">Not important
                 but urgent</p>
             <hr>
@@ -62,7 +65,7 @@
                 {% if not todo.completed %}
                 {% if not todo.important and todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
-                   class="btn btn-primary mb-3 shadow">
+                   class="btn btn-outline-dark mb-3 shadow">
                     {{ todo.title }}
                 </a>
                 {% endif %}
@@ -72,9 +75,10 @@
         </div>
     </div>
 
-    <div class="card col-11 col-md-5 m-3 bg-body-tertiary">
+    <div class="card col-11 p-0 col-md-5 m-3 bg-body-tertiary">
+        <h2 class="card-header mb-3 fw-bold text-bg-danger">
+            Eliminate</h2>
         <div class="card-body">
-            <h2 class="card-title mb-3 fw-bold text-danger">Eliminate</h2>
             <p class="card-subtitle text-secondary-emphasis">Not important
                 and not urgent</p>
             <hr>
@@ -83,9 +87,8 @@
                 {% if not todo.completed %}
                 {% if not todo.important and not todo.urgent %}
                 <a href="{% url 'todo_detail' todo.pk %}" type="button"
-                   class="btn btn-danger mb-3 shadow"
-                   data-bs-toggle="modal"
-                   data-bs-target="#{{todo.pk}}">{{ todo.title }}
+                   class="btn btn-outline-dark mb-3 shadow">
+                    {{ todo.title }}
                 </a>
                 {% endif %}
                 {% endif %}
