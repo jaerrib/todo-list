@@ -26,7 +26,7 @@
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         {% if user.is_authenticated %}
-            <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Home</a></li>
+<!--            <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Home</a></li>-->
             <li><a href="{% url 'todo_list' %}" class="nav-link px-2 link-body-emphasis">ToDo List</a></li>
             <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-emphasis>">Add a ToDo</a></li>
         </ul>
@@ -76,7 +76,6 @@
         </a>
 
         <ul class="nav col-md-4 justify-content-end">
-        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
             {% if user.is_authenticated %}
             <li class="nav-item"><a href="{% url 'todo_list' %}" class="nav-link px-2 text-body-secondary">ToDo List</a></li>
             <li class="nav-item"><a href="{% url 'todo_new' %}" class="nav-link px-2 text-body-secondary">Add a ToDo</a></li>
