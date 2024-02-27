@@ -18,6 +18,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="{% url 'home' %}" class="nav-link link-body-emphasis">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+                <title>Home</title>
                 <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z"/>
                 <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z"/>
                 <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z"/>
@@ -26,13 +27,13 @@
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         {% if user.is_authenticated %}
-<!--            <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Home</a></li>-->
-            <li><a href="{% url 'todo_list' %}" class="nav-link px-2 link-body-emphasis">ToDo List</a></li>
-            <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-emphasis>">Add a ToDo</a></li>
+            <li><a href="{% url 'todo_list' %}" class="nav-link px-2 link-body-emphasis">My ToDo List</a></li>
+            <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-primary">Add a ToDo</a></li>
         </ul>
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <title>User options</title>
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                     </svg>
@@ -41,12 +42,14 @@
                 <li><span class="dropdown-item-text fw-bold">{{ user }}</span></li>
                 <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <form method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button type="submit"  class="dropdown-item" >Log Out</button>
-                        </form>
-                    </li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit"  class="dropdown-item" >Log Out</button>
+                    </form>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li class="dropdown-item text-secondary">Ver. 20240227</li>
                 </ul>
             </div>
         {% else %}
@@ -70,14 +73,12 @@
 <div class="container mt-5">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023-2024 John Beers</p>
-
         <a href="http://www.djangoproject.com/">
             <img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif" alt="Made with Django." title="Made with Django.">
         </a>
-
         <ul class="nav col-md-4 justify-content-end">
             {% if user.is_authenticated %}
-            <li class="nav-item"><a href="{% url 'todo_list' %}" class="nav-link px-2 text-body-secondary">ToDo List</a></li>
+            <li class="nav-item"><a href="{% url 'todo_list' %}" class="nav-link px-2 text-body-secondary">My ToDo List</a></li>
             <li class="nav-item"><a href="{% url 'todo_new' %}" class="nav-link px-2 text-body-secondary">Add a ToDo</a></li>
             {% endif %}
         <li class="nav-item"><a href="https://codeberg.org/jaerrib/todo-list" class="nav-link px-2 text-body-secondary" target="_blank">View the Source Code</a></li>
