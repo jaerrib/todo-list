@@ -32,18 +32,23 @@
     <div class="card-footer">
         {% if todo.completed %}
         <a class="btn btn-primary"
-           href="{% url 'todo_reactivate' todo.pk %}">Reactivate
-            ToDo</a>
+           href="{% url 'todo_reactivate' todo.pk %}">Reactivate ToDo
+        </a>
         {% else %}
         <a class="btn btn-primary"
-           href="{% url 'todo_complete' todo.pk %}">Complete ToDo</a>
+           href="{% url 'todo_complete' todo.pk %}">Complete ToDo
+        </a>
         {% endif %}
-        <a class="btn btn-secondary" href="{% url 'todo_edit' todo.pk %}">Edit
-            ToDo</a>
+        <a class="btn btn-secondary" href="{% url 'todo_edit' todo.pk %}">
+            Edit ToDo
+        </a>
         <a class="btn btn-outline-secondary"
-           href="{% url 'todo_delete' todo.pk %}">Delete ToDo</a>
-        <a class="btn btn-link" href="{% url 'todo_list' %}">Back to ToDo
-            List</a>
+           href="{% url 'todo_delete' todo.pk %}">
+            Delete ToDo
+        </a>
+        <a class="btn btn-link" href="{% url 'todo_list' %}">
+            Back to ToDo List
+        </a>
     </div>
 </div>
 {% endblock content %}
