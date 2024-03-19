@@ -4,8 +4,13 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import ToDoCreateForm, ToDoUpdateForm
-from .models import ToDo
+from .forms import (
+    ToDoCreateForm,
+    ToDoUpdateForm,
+    ToDoListCreateForm,
+    ToDoListUpdateForm,
+)
+from .models import ToDo, ToDoList
 
 
 class HomePageView(TemplateView):
@@ -83,3 +88,44 @@ def todo_reactivate(request, pk):
         model.completed = False
         model.save()
         return redirect("todo_list")
+
+
+class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = ToDoList
+    template_name = "todo_list_detail.html"
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
+
+
+class ToDoListCreateView(LoginRequiredMixin, CreateView):
+    model = ToDoList
+    form_class = ToDoListCreateForm
+    template_name = "todo_list_new.html"
+    success_url = reverse_lazy("todo_list")
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+
+class ToDoListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ToDoList
+    form_class = ToDoListUpdateForm
+    template_name = "todo_List_edit.html"
+    success_url = reverse_lazy("todo_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
+
+
+class TodoListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = ToDoList
+    template_name = "todo_list_delete.html"
+    success_url = reverse_lazy("todo_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user

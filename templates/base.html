@@ -28,7 +28,8 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         {% if user.is_authenticated %}
             <li><a href="{% url 'todo_list' %}" class="nav-link px-2 link-body-emphasis">My ToDo List</a></li>
-            <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-primary">Add a ToDo</a></li>
+            <li><a href="{% url 'todo_list_new' %}" class="nav-link px-2 link-body-primary">Add a List</a></li>
+            <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-primary">Add a ToDo</a>
         </ul>
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
