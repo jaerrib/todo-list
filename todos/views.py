@@ -18,11 +18,11 @@ class HomePageView(TemplateView):
 
 
 class ToDoListView(LoginRequiredMixin, ListView):
-    model = ToDo
-    template_name = "todo_list.html"
+    model = ToDoList
+    template_name = "list_manager.html"
 
     def get_queryset(self):
-        return ToDo.objects.filter(creator=self.request.user.pk)
+        return ToDoList.objects.filter(creator=self.request.user.pk)
 
 
 class ToDoDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}ToDo List Manager{% endblock title%}
+
+{% block content %}
+
+<h1>ToDo List Manager</h1>
+<ul>
+
+    {% for todo_list in todolist_list %}
+    <li>
+        <a href="{% url 'todo_list_detail' todo_list.pk %}">
+            {{ todo_list.title }}
+        </a>
+    </li>
+    {% endfor %}
+
+</ul>
+{% endblock content %}

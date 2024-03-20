@@ -26,8 +26,10 @@ urlpatterns = [
     path("todos/<int:pk>/reactivate/", todo_reactivate, name="todo_reactivate"),
     path("todos/lists/new/", ToDoListCreateView.as_view(),
          name="todo_list_new"),
-    path("todos/lists/<int:pk>", ToDoListDetailView.as_view(),
-         name="todo_list_detail"),
+    path(
+        "todos/lists/<int:pk>/", ToDoListDetailView.as_view(),
+        name="todo_list_detail"
+    ),
     path(
         "todos/lists/<int:pk>/edit/",
         ToDoListUpdateView.as_view(),
