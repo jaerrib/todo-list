@@ -36,7 +36,7 @@ urlpatterns = [
         name="todo_list_edit",
     ),
     path(
-        "todos/lists/<int:pk>/delete",
+        "todos/lists/<int:pk>/delete/",
         TodoListDeleteView.as_view(),
         name="todo_list_delete",
     ),

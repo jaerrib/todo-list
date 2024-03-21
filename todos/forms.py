@@ -11,7 +11,14 @@ class DateInput(forms.DateInput):
 class ToDoCreateForm(ModelForm):
     class Meta:
         model = ToDo
-        fields = ["title", "details", "important", "urgent", "due_date"]
+        fields = [
+            "title",
+            "details",
+            "important",
+            "urgent",
+            "due_date",
+            "todo_list",
+        ]
         widgets = {
             "due_date": DateInput(),
         }
@@ -27,6 +34,7 @@ class ToDoUpdateForm(ModelForm):
             "urgent",
             "completed",
             "due_date",
+            "todo_list",
         ]
         widgets = {
             "due_date": DateInput(),
