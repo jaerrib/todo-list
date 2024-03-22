@@ -12,6 +12,9 @@ class ToDoList(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("todo_list_detail", kwargs={"pk": self.pk})
+
 
 class ToDo(models.Model):
     title = models.CharField(max_length=200)

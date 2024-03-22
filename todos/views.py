@@ -93,10 +93,21 @@ def todo_reactivate(request, pk):
 class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = ToDoList
     template_name = "todo_list_detail.html"
+    context_object_name = "todo_list"
+    pk_url_kwarg = "pk"
 
     def test_func(self):
-        obj = self.get_object()
-        return obj.creator == self.request.user
+        todo_list = self.get_object()
+        return todo_list.creator == self.request.user
+
+    def get_queryset(self):
+        return ToDoList.objects.filter(pk=self.kwargs["pk"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        todo_list = self.get_object()
+        context["todo_list"] = ToDo.objects.filter(todo_list=todo_list)
+        return context
 
 
 class ToDoListCreateView(LoginRequiredMixin, CreateView):

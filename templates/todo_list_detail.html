@@ -1,54 +1,173 @@
 {% extends "base.html" %}
 
-{% block title %}Post Detail{% endblock title %}
+{% block title %}ToDo List{% endblock title%}
 
 {% block content %}
-<div class="card bg-body-tertiary">
-    <div class="card-header">
-        <h1>{{ todo.title }}</h1>
-    </div>
-    <div class="card-body">
-        <div class="card-body">
-            <p class="card-text">ToDo Details: {{ todo.details }}</p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Due Date: {{ todo.due_date }}</li>
 
-                {% if todo.important %}
-                <li class="list-group-item fw-bold">Important</li>
-                {% endif %}
+<h1>ToDo List</h1>
+<div class="row row-cols-1 row-cols-md-2 g-4">
 
-                {% if todo.urgent %}
-                <li class="list-group-item fw-bold">Urgent</li>
-                {% endif %}
-
-                {% if todo.completed %}
-                <li class="list-group-item">Completed</li>
-                {% else %}
-                <li class="list-group-item fw-bold">Incomplete</li>
-                {% endif %}
-            </ul>
+    <div class="col">
+        <div class="card p-0 bg-body-tertiary">
+            <h2 class="card-header mb-3 fw-bold text-bg-success">
+                Do:</h2>
+            <div class="card-body">
+                <p class="card-subtitle text-secondary-emphasis">Important
+                    and urgent</p>
+                <hr>
+                <div class="d-grid gap-1">
+                    {% block do %}
+                    {% include "do.html" with todo_list=todo_list %}
+                    {% endblock do %}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="card-footer">
-        {% if todo.completed %}
-        <a class="btn btn-primary"
-           href="{% url 'todo_reactivate' todo.pk %}">Reactivate ToDo
-        </a>
-        {% else %}
-        <a class="btn btn-primary"
-           href="{% url 'todo_complete' todo.pk %}">Complete ToDo
-        </a>
-        {% endif %}
-        <a class="btn btn-secondary" href="{% url 'todo_edit' todo.pk %}">
-            Edit ToDo
-        </a>
-        <a class="btn btn-outline-secondary"
-           href="{% url 'todo_delete' todo.pk %}">
-            Delete ToDo
-        </a>
-        <a class="btn btn-link" href="{% url 'todo_list' %}">
-            Back to ToDo List
-        </a>
+
+    <div class="col">
+        <div class="card p-0 bg-body-tertiary">
+            <h2 class="card-header mb-3 fw-bold text-bg-warning">
+                Schedule:</h2>
+            <div class="card-body">
+                <p class="card-subtitle text-secondary-emphasis">Important
+                    and not urgent</p>
+                <hr>
+                <div class="d-grid gap-1">
+                    {% block schedule %}
+                    {% include "schedule.html" with todo_list=todo_list %}
+                    {% endblock schedule %}
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="col">
+        <div class="card p-0 bg-body-tertiary">
+            <h2 class="card-header mb-3 fw-bold text-bg-primary">
+                Delegate:</h2>
+            <div class="card-body">
+                <p class="card-subtitle text-secondary-emphasis">Not Important
+                    but urgent</p>
+                <hr>
+                <div class="d-grid gap-1">
+                    {% block delegate %}
+                    {% include "delegate.html" with todo_list=todo_list %}
+                    {% endblock delegate %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card p-0 bg-body-tertiary">
+            <h2 class="card-header mb-3 fw-bold text-bg-danger">
+                Eliminate:</h2>
+            <div class="card-body">
+                <p class="card-subtitle text-secondary-emphasis">Not important
+                    and not urgent</p>
+                <hr>
+                <div class="d-grid gap-1">
+                    {% block eliminate %}
+                    {% include "eliminate.html" with todo_list=todo_list %}
+                    {% endblock eliminate %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<hr class="m-3">
+<div class="row">
+    <h2 class="text-secondary">Completed ToDos</h2>
+    <div class="d-flex d-block mt-3">
+
+        {% for todo in todo_list %}
+        {% if todo.completed %}
+        <!-- Detail Modal -->
+        <div class="modal fade" id="detail{{todo.pk}}"
+             tabindex="-1"
+             aria-labelledby="{{todo.pk}}Label"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header card-header">
+                        <h2 class="modal-title fs-5"
+                            id="{{todo.pk}}Label">
+                            {{ todo.title }}</h2>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body card-body">
+                        <p class="card-text">ToDo Details:
+                            {{ todo.details }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Due
+                                Date: {{ todo.due_date }}
+                            </li>
+
+                            {% if todo.important %}
+                            <li class="list-group-item fw-bold">
+                                Important
+                            </li>
+                            {% endif %}
+
+                            {% if todo.urgent %}
+                            <li class="list-group-item fw-bold">
+                                Urgent
+                            </li>
+                            {% endif %}
+
+                            {% if todo.completed %}
+                            <li class="list-group-item">
+                                Completed
+                            </li>
+                            {% else %}
+                            <li class="list-group-item fw-bold">
+                                Incomplete
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        {% if todo.completed %}
+                        <a class="btn btn-primary"
+                           href="{% url 'todo_reactivate' todo.pk %}">
+                            Reactivate
+                        </a>
+                        {% else %}
+                        <a class="btn btn-primary"
+                           href="{% url 'todo_complete' todo.pk %}">
+                            Complete
+                        </a>
+                        {% endif %}
+                        <a class="btn btn-secondary"
+                           href="{% url 'todo_edit' todo.pk %}">
+                            Edit
+                        </a>
+                        <a class="btn btn-outline-secondary"
+                           href="{% url 'todo_delete' todo.pk %}">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Detail Modal-->
+
+        <a href="#detail{{todo.pk}}"
+           class="btn btn-outline-secondary btn me-3 mb-3"
+           data-bs-toggle="modal"
+           data-bs-target="#detail{{todo.pk}}">
+            {{ todo.title }}
+        </a>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
 {% endblock content %}
