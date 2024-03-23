@@ -107,6 +107,8 @@ class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         context = super().get_context_data(**kwargs)
         todo_list = self.get_object()
         context["todo_list"] = ToDo.objects.filter(todo_list=todo_list)
+        context["list_name"] = todo_list.title
+        context["list_pk"] = todo_list.pk
         return context
 
 
