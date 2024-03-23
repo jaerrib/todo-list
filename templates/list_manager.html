@@ -4,15 +4,27 @@
 
 {% block content %}
 
-<h1>ToDo List Manager</h1>
-<ul>
+<h1>List Manager</h1>
+<ul class="mt-4 ">
 
     {% for todo_list in todolist_list %}
     <li>
-        <a href="{% url 'todo_list_detail' todo_list.pk %}">
+        <h2>
             {{ todo_list.title }}
+        </h2>
+        <a href="{% url 'todo_list_detail' todo_list.pk %}">
+            Details
+        </a>
+        |
+        <a href="{% url 'todo_list_edit' todo_list.pk %}">
+            Edit
+        </a>
+        |
+        <a href="{% url 'todo_list_delete' todo_list.pk %}">
+            Delete
         </a>
     </li>
+    <hr>
     {% endfor %}
 
 </ul>
