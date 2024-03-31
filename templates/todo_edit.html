@@ -13,11 +13,12 @@
             {% csrf_token %}
             {{ form|crispy }}
             <button type="submit" class="btn btn-primary">Update</button>
-            <a class="btn btn-secondary" href="{% url 'todo_detail' todo.pk %}">
+            <a class="btn btn-secondary"
+               href="{% url 'todo_list_detail' todo.todo_list.pk %}">
                 Cancel
             </a>
             <a class="btn btn-outline-secondary" href="{% url 'todo_list' %}">Back
-                to ToDo List
+                to List Manager
             </a>
         </form>
     </div>
