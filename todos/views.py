@@ -126,7 +126,7 @@ class ToDoListCreateView(LoginRequiredMixin, CreateView):
 class ToDoListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ToDoList
     form_class = ToDoListUpdateForm
-    template_name = "todo_List_edit.html"
+    template_name = "todo_list_edit.html"
     success_url = reverse_lazy("todo_list")
 
     def test_func(self):
