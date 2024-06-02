@@ -12,12 +12,8 @@
             {% csrf_token %}
             <p>Are you sure you want to delete "{{ todo.title }}"?</p>
             <button type="submit" class="btn btn-primary">Confirm</button>
-            <button class="btn btn-secondary"
-                    href="{% url 'todo_detail' todo.pk %}">Cancel
-            </button>
-            <button class="btn btn-outline-secondary"
-                    href="{% url 'todo_list' %}">Back to ToDo List
-            </button>
+            <a class="btn btn-secondary"
+               href="{% url 'todo_list_detail' todo.todo_list.pk %}">Cancel</a>
         </form>
     </div>
 </div>
