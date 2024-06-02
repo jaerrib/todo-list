@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import ToDo
+from .models import ToDo, ToDoList
 
 
 class DateInput(forms.DateInput):
@@ -11,7 +11,14 @@ class DateInput(forms.DateInput):
 class ToDoCreateForm(ModelForm):
     class Meta:
         model = ToDo
-        fields = ["title", "details", "important", "urgent", "due_date"]
+        fields = [
+            "title",
+            "details",
+            "important",
+            "urgent",
+            "due_date",
+            "todo_list",
+        ]
         widgets = {
             "due_date": DateInput(),
         }
@@ -27,7 +34,20 @@ class ToDoUpdateForm(ModelForm):
             "urgent",
             "completed",
             "due_date",
+            "todo_list",
         ]
         widgets = {
             "due_date": DateInput(),
         }
+
+
+class ToDoListCreateForm(ModelForm):
+    class Meta:
+        model = ToDoList
+        fields = ["title"]
+
+
+class ToDoListUpdateForm(ModelForm):
+    class Meta:
+        model = ToDoList
+        fields = ["title"]

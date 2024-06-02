@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<header class="py-3 mb-3 border-bottom bg-body-tertiary sticky-top">
+<header class="py-1 mb-3 border-bottom bg-body-tertiary sticky-top">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="{% url 'home' %}" class="nav-link link-body-emphasis">
@@ -27,8 +27,9 @@
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         {% if user.is_authenticated %}
-            <li><a href="{% url 'todo_list' %}" class="nav-link px-2 link-body-emphasis">My ToDo List</a></li>
-            <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-primary">Add a ToDo</a></li>
+            <li><a href="{% url 'todo_list' %}" class="nav-link px-2 link-body-emphasis">List Manager</a></li>
+            <li><a href="{% url 'todo_list_new' %}" class="nav-link px-2 link-body-primary">Add a List</a></li>
+            <li><a href="{% url 'todo_new' %}" class="nav-link px-2 link-body-primary">Add a ToDo</a>
         </ul>
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,8 +79,9 @@
             </a>
             <ul class="nav col-md-4 justify-content-end">
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'todo_list' %}" class="nav-link px-2 text-body-secondary">My ToDo List</a></li>
-                <li class="nav-item"><a href="{% url 'todo_new' %}" class="nav-link px-2 text-body-secondary">Add a ToDo</a></li>
+<!--                <li class="nav-item"><a href="{% url 'todo_list' %}" class="nav-link px-2 text-body-secondary">List Manager</a></li>-->
+<!--                <li class="nav-item"><a href="{% url 'todo_list_new' %}" class="nav-link px-2 text-body-secondary">New List</a></li>-->
+<!--                <li class="nav-item"><a href="{% url 'todo_new' %}" class="nav-link px-2 text-body-secondary">Add a ToDo</a></li>-->
                 {% endif %}
             <li class="nav-item"><a href="https://codeberg.org/jaerrib/todo-list" class="nav-link px-2 text-body-secondary" target="_blank">View the Source Code</a></li>
             </ul>

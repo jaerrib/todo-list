@@ -4,8 +4,13 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import ToDoCreateForm, ToDoUpdateForm
-from .models import ToDo
+from .forms import (
+    ToDoCreateForm,
+    ToDoUpdateForm,
+    ToDoListCreateForm,
+    ToDoListUpdateForm,
+)
+from .models import ToDo, ToDoList
 
 
 class HomePageView(TemplateView):
@@ -13,11 +18,11 @@ class HomePageView(TemplateView):
 
 
 class ToDoListView(LoginRequiredMixin, ListView):
-    model = ToDo
-    template_name = "todo_list.html"
+    model = ToDoList
+    template_name = "list_manager.html"
 
     def get_queryset(self):
-        return ToDo.objects.filter(creator=self.request.user.pk)
+        return ToDoList.objects.filter(creator=self.request.user.pk)
 
 
 class ToDoDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
@@ -83,3 +88,57 @@ def todo_reactivate(request, pk):
         model.completed = False
         model.save()
         return redirect("todo_list")
+
+
+class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = ToDoList
+    template_name = "todo_list_detail.html"
+    context_object_name = "todo_list"
+    pk_url_kwarg = "pk"
+
+    def test_func(self):
+        todo_list = self.get_object()
+        return todo_list.creator == self.request.user
+
+    def get_queryset(self):
+        return ToDoList.objects.filter(pk=self.kwargs["pk"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        todo_list = self.get_object()
+        context["todo_list"] = ToDo.objects.filter(todo_list=todo_list)
+        context["list_name"] = todo_list.title
+        context["list_pk"] = todo_list.pk
+        return context
+
+
+class ToDoListCreateView(LoginRequiredMixin, CreateView):
+    model = ToDoList
+    form_class = ToDoListCreateForm
+    template_name = "todo_list_new.html"
+    success_url = reverse_lazy("todo_list")
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+
+class ToDoListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ToDoList
+    form_class = ToDoListUpdateForm
+    template_name = "todo_list_edit.html"
+    success_url = reverse_lazy("todo_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
+
+
+class TodoListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = ToDoList
+    template_name = "todo_list_delete.html"
+    success_url = reverse_lazy("todo_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
