@@ -17,7 +17,6 @@ class ToDoCreateForm(ModelForm):
             "important",
             "urgent",
             "due_date",
-            "todo_list",
         ]
         widgets = {
             "due_date": DateInput(),

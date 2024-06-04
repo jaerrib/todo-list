@@ -38,9 +38,25 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     model = ToDo
     form_class = ToDoCreateForm
     template_name = "todo_new.html"
-    success_url = reverse_lazy("todo_list")
+    context_object_name = "todo_list"
+    pk_url_kwarg = "todo_list_pk"
+
+    def get_redirect_url(self, param):
+        return reverse_lazy("todo_list_detail", kwargs={"param": param})
+
+    def get_queryset(self):
+        return ToDoList.objects.filter(pk=self.kwargs["todo_list_pk"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = ToDoCreateForm()
+        context["todo_list"] = ToDoList.objects.get(
+            pk=self.kwargs["todo_list_pk"])
+        return context
 
     def form_valid(self, form):
+        form.instance.todo_list = ToDoList.objects.get(
+            pk=self.kwargs["todo_list_pk"])
         form.instance.creator = self.request.user
         return super().form_valid(form)
 

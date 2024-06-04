@@ -4,7 +4,19 @@
 
 {% block content %}
 
-<h1>{{list_name}}</h1>
+<div class="d-flex justify-content-between">
+
+    <h1>{{list_name}}</h1>
+    <p>
+
+        <a href="{% url 'todo_new' object.pk %}"
+           class="btn btn-lg btn-primary">
+            Add a ToDo
+        </a>
+    </p>
+</div>
+
+
 <div class="row row-cols-1 row-cols-md-2 g-4">
 
     <div class="col">
