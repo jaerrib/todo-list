@@ -46,7 +46,8 @@
            href="{% url 'todo_delete' todo.pk %}">
             Delete ToDo
         </a>
-        <a class="btn btn-link" href="{% url 'todo_list' %}">
+        <a class="btn btn-link"
+           href="{% url 'todo_list_detail' todo.todo_list.pk %}">
             Back to ToDo List
         </a>
     </div>
