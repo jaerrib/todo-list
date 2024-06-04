@@ -16,7 +16,8 @@
     {% for todo_list in todolist_list %}
     <tr>
         <td class="py-3">
-            {{ todo_list.title }}
+            <a href="{% url 'todo_list_detail' todo_list.pk %}">
+                {{ todo_list.title }}</a>
         </td>
         <td class="py-3">
             <div class="d-flex">
