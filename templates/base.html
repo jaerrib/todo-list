@@ -41,6 +41,7 @@
                 <ul class="dropdown-menu text-small">
                 <li><span class="dropdown-item-text fw-bold">{{ user }}</span></li>
                 <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                <li><a class="dropdown-item" href="{% url 'export_data' %}">Export My Data</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <form method="post" action="{% url 'logout' %}">

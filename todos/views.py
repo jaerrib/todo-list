@@ -1,4 +1,7 @@
+import csv
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView
@@ -158,3 +161,41 @@ class TodoListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.creator == self.request.user
+
+
+def export_data(request):
+    query_set = ToDo.objects.filter(creator=request.user.pk).order_by(
+        "todo_list__title"
+    )
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={
+            "Content-Disposition": 'attachment; filename="exported_data.csv"'},
+    )
+    writer = csv.writer(response)
+
+    writer.writerow(
+        [
+            "Title",
+            "Details",
+            "Important",
+            "Urgent",
+            "Due Date",
+            "Completed",
+            "ToDo List",
+        ]
+    )
+    for item in query_set:
+        writer.writerow(
+            [
+                item.title,
+                item.details,
+                item.important,
+                item.urgent,
+                item.due_date,
+                item.completed,
+                item.todo_list,
+            ]
+        )
+
+    return response
