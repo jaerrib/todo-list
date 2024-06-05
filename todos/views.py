@@ -53,13 +53,11 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = ToDoCreateForm()
-        context["todo_list"] = ToDoList.objects.get(
-            pk=self.kwargs["todo_list_pk"])
+        context["todo_list"] = ToDoList.objects.get(pk=self.kwargs["todo_list_pk"])
         return context
 
     def form_valid(self, form):
-        form.instance.todo_list = ToDoList.objects.get(
-            pk=self.kwargs["todo_list_pk"])
+        form.instance.todo_list = ToDoList.objects.get(pk=self.kwargs["todo_list_pk"])
         form.instance.creator = self.request.user
         return super().form_valid(form)
 
@@ -169,8 +167,7 @@ def export_data(request):
     )
     response = HttpResponse(
         content_type="text/csv",
-        headers={
-            "Content-Disposition": 'attachment; filename="exported_data.csv"'},
+        headers={"Content-Disposition": 'attachment; filename="exported_data.csv"'},
     )
     writer = csv.writer(response)
 
@@ -199,3 +196,7 @@ def export_data(request):
         )
 
     return response
+
+
+class PrivacyPolicyView(TemplateView):
+    template_name = "privacy_policy.html"

@@ -14,6 +14,7 @@ from .views import (
     ToDoListUpdateView,
     TodoListDeleteView,
     export_data,
+    PrivacyPolicyView,
 )
 
 urlpatterns = [
@@ -46,5 +47,7 @@ urlpatterns = [
         TodoListDeleteView.as_view(),
         name="todo_list_delete",
     ),
+    path("legal/privacy-policy/", PrivacyPolicyView.as_view(),
+         name="privacy-policy"),
     path("", HomePageView.as_view(), name="home"),
 ]
