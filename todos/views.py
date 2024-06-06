@@ -1,4 +1,7 @@
+import csv
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView
@@ -50,13 +53,11 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = ToDoCreateForm()
-        context["todo_list"] = ToDoList.objects.get(
-            pk=self.kwargs["todo_list_pk"])
+        context["todo_list"] = ToDoList.objects.get(pk=self.kwargs["todo_list_pk"])
         return context
 
     def form_valid(self, form):
-        form.instance.todo_list = ToDoList.objects.get(
-            pk=self.kwargs["todo_list_pk"])
+        form.instance.todo_list = ToDoList.objects.get(pk=self.kwargs["todo_list_pk"])
         form.instance.creator = self.request.user
         return super().form_valid(form)
 
@@ -158,3 +159,44 @@ class TodoListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.creator == self.request.user
+
+
+def export_data(request):
+    query_set = ToDo.objects.filter(creator=request.user.pk).order_by(
+        "todo_list__title"
+    )
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="exported_data.csv"'},
+    )
+    writer = csv.writer(response)
+
+    writer.writerow(
+        [
+            "Title",
+            "Details",
+            "Important",
+            "Urgent",
+            "Due Date",
+            "Completed",
+            "ToDo List",
+        ]
+    )
+    for item in query_set:
+        writer.writerow(
+            [
+                item.title,
+                item.details,
+                item.important,
+                item.urgent,
+                item.due_date,
+                item.completed,
+                item.todo_list,
+            ]
+        )
+
+    return response
+
+
+class PrivacyPolicyView(TemplateView):
+    template_name = "privacy_policy.html"

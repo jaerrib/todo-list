@@ -13,10 +13,13 @@ from .views import (
     ToDoListCreateView,
     ToDoListUpdateView,
     TodoListDeleteView,
+    export_data,
+    PrivacyPolicyView,
 )
 
 urlpatterns = [
     path("todos/", ToDoListView.as_view(), name="todo_list"),
+    path("todos/export/", export_data, name="export_data"),
     path("todos/<int:pk>/", ToDoDetailView.as_view(), name="todo_detail"),
     path(
         "todos/new/<int:todo_list_pk>/",
@@ -44,5 +47,7 @@ urlpatterns = [
         TodoListDeleteView.as_view(),
         name="todo_list_delete",
     ),
+    path("legal/privacy-policy/", PrivacyPolicyView.as_view(),
+         name="privacy-policy"),
     path("", HomePageView.as_view(), name="home"),
 ]
