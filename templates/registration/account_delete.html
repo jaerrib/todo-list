@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block content %}
+<div class="card bg-body-tertiary">
+    <div class="card-header">
+        <h1>Delete Account</h1>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete your account
+                ({{ object.username }}) and all associated data?</p>
+            <p class="fw-bold text-danger">WARNING: Doing this is
+                irreversible!</p>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+            <a class="btn btn-secondary"
+               href="{% url 'todo_list' %}">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

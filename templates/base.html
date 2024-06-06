@@ -42,6 +42,7 @@
                 <li><span class="dropdown-item-text fw-bold">{{ user }}</span></li>
                 <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
                 <li><a class="dropdown-item" href="{% url 'export_data' %}">Export My Data</a></li>
+                <li><a class="dropdown-item" href="{% url 'account_delete' pk=request.user.pk %}">Delete My Account</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <form method="post" action="{% url 'logout' %}">
@@ -79,6 +80,7 @@
             </a>
             <ul class="nav col-md-4 justify-content-end">
             <li class="nav-item"><a href="https://codeberg.org/jaerrib/todo-list" class="nav-link px-2 text-body-secondary" target="_blank">View the Source Code</a></li>
+            <li class="nav-item"><a href="{% url 'privacy-policy' %}" class="nav-link px-2 text-body-secondary">Privacy Policy</a></li>
             </ul>
         </div>
     </footer>
