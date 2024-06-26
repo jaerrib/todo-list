@@ -141,7 +141,10 @@ class ToDoListCreateView(LoginRequiredMixin, CreateView):
     model = ToDoList
     form_class = ToDoListCreateForm
     template_name = "todo_list_new.html"
-    success_url = reverse_lazy("todo_list")
+
+    def get_success_url(self):
+        todo_list_pk = self.object.id
+        return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
