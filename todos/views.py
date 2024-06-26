@@ -3,7 +3,7 @@ import csv
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -44,6 +44,10 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "todo_list"
     pk_url_kwarg = "todo_list_pk"
 
+    def get_success_url(self):
+        todo_list_pk = self.object.todo_list_id
+        return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
+
     def get_redirect_url(self, param):
         return reverse_lazy("todo_list_detail", kwargs={"param": param})
 
@@ -67,6 +71,10 @@ class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ToDoUpdateForm
     template_name = "todo_edit.html"
     success_url = reverse_lazy("todo_list")
+
+    def get_success_url(self):
+        todo_list_pk = self.object.todo_list_id
+        return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
 
     def test_func(self):
         obj = self.get_object()
@@ -133,7 +141,10 @@ class ToDoListCreateView(LoginRequiredMixin, CreateView):
     model = ToDoList
     form_class = ToDoListCreateForm
     template_name = "todo_list_new.html"
-    success_url = reverse_lazy("todo_list")
+
+    def get_success_url(self):
+        todo_list_pk = self.object.id
+        return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
