@@ -45,10 +45,8 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     pk_url_kwarg = "todo_list_pk"
 
     def get_success_url(self):
-        print(self.object.__dict__)
         todo_list_pk = self.object.todo_list_id
         return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
-
 
     def get_redirect_url(self, param):
         return reverse_lazy("todo_list_detail", kwargs={"param": param})
@@ -73,6 +71,10 @@ class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ToDoUpdateForm
     template_name = "todo_edit.html"
     success_url = reverse_lazy("todo_list")
+
+    def get_success_url(self):
+        todo_list_pk = self.object.todo_list_id
+        return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
 
     def test_func(self):
         obj = self.get_object()
