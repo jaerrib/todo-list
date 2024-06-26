@@ -3,7 +3,7 @@ import csv
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -43,6 +43,12 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
     template_name = "todo_new.html"
     context_object_name = "todo_list"
     pk_url_kwarg = "todo_list_pk"
+
+    def get_success_url(self):
+        print(self.object.__dict__)
+        todo_list_pk = self.object.todo_list_id
+        return reverse("todo_list_detail", kwargs={"pk": todo_list_pk})
+
 
     def get_redirect_url(self, param):
         return reverse_lazy("todo_list_detail", kwargs={"param": param})
