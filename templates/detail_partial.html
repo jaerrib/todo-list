@@ -22,7 +22,7 @@
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body card-body">
-                        <p class="card-text">ToDo Details:
+                        <p class="card-text">Task Details:
                             {{ todo.details }}</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Due
@@ -54,12 +54,12 @@
                     </div>
                     <div class="modal-footer card-footer">
                         {% if todo.completed %}
-                        <a class="btn btn-primary"
+                        <a class="btn btn-success"
                            href="{% url 'todo_reactivate' todo.pk %}">
                             Reactivate
                         </a>
                         {% else %}
-                        <a class="btn btn-primary"
+                        <a class="btn btn-success"
                            href="{% url 'todo_complete' todo.pk %}">
                             Complete
                         </a>

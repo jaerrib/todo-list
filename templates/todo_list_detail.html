@@ -10,8 +10,8 @@
     <p>
 
         <a href="{% url 'todo_new' object.pk %}"
-           class="btn btn-lg btn-primary">
-            Add a ToDo
+           class="btn btn-lg btn-success">
+            Add a task
         </a>
     </p>
 </div>
@@ -91,7 +91,7 @@
 
 <hr class="m-3">
 <div class="row">
-    <h2 class="text-secondary">Completed ToDos</h2>
+    <h2 class="text-secondary">Completed Tasks</h2>
     <div class="d-flex d-block mt-3">
 
         {% for todo in todo_list %}
@@ -113,7 +113,7 @@
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body card-body">
-                        <p class="card-text">ToDo Details:
+                        <p class="card-text">Task Details:
                             {{ todo.details }}</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Due
@@ -145,12 +145,12 @@
                     </div>
                     <div class="modal-footer">
                         {% if todo.completed %}
-                        <a class="btn btn-primary"
+                        <a class="btn btn-success"
                            href="{% url 'todo_reactivate' todo.pk %}">
                             Reactivate
                         </a>
                         {% else %}
-                        <a class="btn btn-primary"
+                        <a class="btn btn-success"
                            href="{% url 'todo_complete' todo.pk %}">
                             Complete
                         </a>

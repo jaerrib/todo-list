@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <div class="card-body">
-            <p class="card-text">ToDo Details: {{ todo.details }}</p>
+            <p class="card-text">Task Details: {{ todo.details }}</p>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Due Date: {{ todo.due_date }}</li>
 
@@ -31,12 +31,12 @@
     </div>
     <div class="card-footer">
         {% if todo.completed %}
-        <a class="btn btn-primary"
-           href="{% url 'todo_reactivate' todo.pk %}">Reactivate ToDo
+        <a class="btn btn-success"
+           href="{% url 'todo_reactivate' todo.pk %}">Reactivate task
         </a>
         {% else %}
-        <a class="btn btn-primary"
-           href="{% url 'todo_complete' todo.pk %}">Complete ToDo
+        <a class="btn btn-success"
+           href="{% url 'todo_complete' todo.pk %}">Complete task
         </a>
         {% endif %}
         <a class="btn btn-secondary" href="{% url 'todo_edit' todo.pk %}">
