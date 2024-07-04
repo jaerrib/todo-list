@@ -17,18 +17,15 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="{% url 'home' %}" class="nav-link link-body-emphasis">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
-                <title>Home</title>
-                <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z"/>
-                <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z"/>
-                <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16">
+  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"/>
+</svg>
             <span class="fw-bold ms-1 me-3">Eisenhower Prioritizer</span>
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         {% if user.is_authenticated %}
-            <li class="px-2 mt-2 mt-lg-0"><a href="{% url 'todo_list' %}" class="btn btn-sm btn-outline-dark">List Manager</a></li>
-            <li class="px-2 mt-2 mt-lg-0"><a href="{% url 'todo_list_new' %}" class="btn btn-sm btn-outline-primary">Create a List</a></li>
+            <li class="px-2 mt-2 mt-lg-0"><a href="{% url 'todo_list' %}" class="btn btn-sm btn-outline-dark">Manage my lists</a></li>
+            <li class="px-2 mt-2 mt-lg-0"><a href="{% url 'todo_list_new' %}" class="btn btn-sm btn-outline-success">Start a new list</a></li>
         </ul>
             <div class="dropdown text-end mt-2 mt-lg-0">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,8 +54,8 @@
         {% else %}
         </ul>
         <div class="text-end">
-            <a href="{%  url 'login' %}" class="btn btn-outline-primary">Log In</a>
-            <a href="{% url 'signup' %}" class="btn btn-primary">Register</a>
+            <a href="{%  url 'login' %}" class="btn btn-outline-success">Log In</a>
+            <a href="{% url 'signup' %}" class="btn btn-success">Register</a>
         </div>
         {% endif %}
         </div>
