@@ -16,7 +16,8 @@
     {% for todo_list in todolist_list %}
     <tr>
         <td class="py-3">
-            <a href="{% url 'todo_list_detail' todo_list.pk %}">
+            <a href="{% url 'todo_list_detail' todo_list.pk %}"
+               class="link-success fw-bold">
                 {{ todo_list.title }}</a>
         </td>
         <td class="py-3">
