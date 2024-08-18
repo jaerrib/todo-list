@@ -100,7 +100,7 @@ def todo_complete(request, pk):
     else:
         model.completed = True
         model.save()
-        return redirect("todo_list")
+        return redirect("todo_list_detail", pk=model.todo_list.pk)
 
 
 def todo_reactivate(request, pk):
@@ -112,7 +112,7 @@ def todo_reactivate(request, pk):
     else:
         model.completed = False
         model.save()
-        return redirect("todo_list")
+        return redirect("todo_list_detail", pk=model.todo_list.pk)
 
 
 class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
