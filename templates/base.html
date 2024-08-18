@@ -44,11 +44,11 @@
                 <li>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button type="submit"  class="dropdown-item" >Log Out</button>
+                        <button type="submit"  class="dropdown-item btn btn-success">Log Out</button>
                     </form>
                 </li>
                 <li><hr class="dropdown-divider"></li>
-                <li class="dropdown-item text-secondary">Ver. 20240818</li>
+                <li class="dropdown-item text-secondary">Ver. 20240818.1</li>
                 </ul>
             </div>
         {% else %}

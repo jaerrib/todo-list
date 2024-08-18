@@ -70,7 +70,6 @@ class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ToDo
     form_class = ToDoUpdateForm
     template_name = "todo_edit.html"
-    success_url = reverse_lazy("todo_list")
 
     def get_success_url(self):
         todo_list_pk = self.object.todo_list_id
@@ -84,7 +83,10 @@ class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class TodoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = ToDo
     template_name = "todo_delete.html"
-    success_url = reverse_lazy("todo_list")
+
+    def get_success_url(self):
+        todo_list_id = self.object.todo_list.id
+        return reverse_lazy("todo_list_detail", kwargs={"pk": todo_list_id})
 
     def test_func(self):
         obj = self.get_object()
