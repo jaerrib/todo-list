@@ -16,13 +16,13 @@
     {% for todo_list in todolist_list %}
     <tr>
         <td class="py-3">
-            <a href="{% url 'todo_list_detail' todo_list.pk %}"
+            <a href="{{ todo_list.get_absolute_url }}"
                class="link-success fw-bold">
                 {{ todo_list.title }}</a>
         </td>
         <td class="py-3">
             <div class="d-flex">
-                <a href="{% url 'todo_list_detail' todo_list.pk %}"
+                <a href="{{ todo_list.get_absolute_url }}"
                    class="ms-2 text-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="24"
@@ -34,7 +34,7 @@
                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
                     </svg>
                 </a>
-                <a href="{% url 'todo_list_edit' todo_list.pk %}"
+                <a href="{{ todo_list.get_absolute_url }}"
                    class="ms-2 text-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="24"
@@ -47,7 +47,7 @@
                               d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                     </svg>
                 </a>
-                <a href="{% url 'todo_list_delete' todo_list.pk %}"
+                <a href="{{ todo_list.get_absolute_url }}"
                    class="ms-2 text-danger">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="24"

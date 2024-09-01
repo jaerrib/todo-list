@@ -13,7 +13,7 @@ class ToDoList(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("todo_list_detail", kwargs={"pk": self.pk})
+        return reverse("todo_list_detail", args=[str(self.pk)])
 
 
 class ToDo(models.Model):
@@ -37,4 +37,4 @@ class ToDo(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("todo_detail", kwargs={"pk": self.pk})
+        return reverse("todo_detail", args=[str(self.pk)])
