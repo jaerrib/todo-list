@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     # 3rd Party
     "crispy_forms",
     "crispy_bootstrap5",
+    "allauth",
+    "allauth.account",
     # Local
     "todos",
     "accounts",
@@ -65,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -143,10 +146,15 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = "todo_list"
-LOGOUT_REDIRECT_URL = "home"
-
 CRISPY_ALLOWED_TEMPLATE_PACK = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+# django-allauth config
+LOGIN_REDIRECT_URL = "todo_list"
+LOGOUT_REDIRECT_URL = "home"
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
