@@ -5,17 +5,14 @@
 {% block content %}
 
 <div class="d-flex justify-content-between">
-
     <h1>{{list_name}}</h1>
     <p>
-
         <a href="{% url 'todo_new' object.pk %}"
            class="btn btn-lg btn-success">
             Add a task
         </a>
     </p>
 </div>
-
 
 <div class="row row-cols-1 row-cols-md-2 g-4">
 
@@ -28,9 +25,9 @@
                     and urgent</p>
                 <hr>
                 <div class="d-grid gap-1">
-                    {% block do %}
-                    {% include "do.html" with todo_list=todo_list %}
-                    {% endblock do %}
+                    {% for todo in do_list %}
+                    {% include "detail_partial.html" with todo=todo %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -45,9 +42,9 @@
                     and not urgent</p>
                 <hr>
                 <div class="d-grid gap-1">
-                    {% block schedule %}
-                    {% include "schedule.html" with todo_list=todo_list %}
-                    {% endblock schedule %}
+                    {% for todo in schedule_list %}
+                    {% include "detail_partial.html" with todo=todo %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -62,9 +59,9 @@
                     but urgent</p>
                 <hr>
                 <div class="d-grid gap-1">
-                    {% block delegate %}
-                    {% include "delegate.html" with todo_list=todo_list %}
-                    {% endblock delegate %}
+                    {% for todo in delegate_list %}
+                    {% include "detail_partial.html" with todo=todo %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -79,9 +76,9 @@
                     and not urgent</p>
                 <hr>
                 <div class="d-grid gap-1">
-                    {% block eliminate %}
-                    {% include "eliminate.html" with todo_list=todo_list %}
-                    {% endblock eliminate %}
+                    {% for todo in eliminate_list %}
+                    {% include "detail_partial.html" with todo=todo %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -94,7 +91,7 @@
     <h2 class="text-secondary">Completed Tasks</h2>
     <div class="d-flex d-block mt-3">
 
-        {% for todo in todo_list %}
+        {% for todo in completed_list %}
         {% if todo.completed %}
         <!-- Detail Modal -->
         <div class="modal fade" id="detail{{todo.pk}}"
