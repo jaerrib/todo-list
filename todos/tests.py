@@ -39,7 +39,7 @@ class ToDotests(TestCase):
         response = self.client.get(self.todo_list.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "testlist")
-        self.assertTemplateUsed(response, "todo_list_detail.html")
+        self.assertTemplateUsed(response, "todos/todo_list_detail.html")
 
     def test_todo_list_view_for_logged_out_user(self):
         self.client.logout()

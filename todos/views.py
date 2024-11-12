@@ -22,7 +22,7 @@ class HomePageView(TemplateView):
 
 class ToDoListView(LoginRequiredMixin, ListView):
     model = ToDoList
-    template_name = "list_manager.html"
+    template_name = "todos/list_manager.html"
 
     def get_queryset(self):
         return ToDoList.objects.filter(creator=self.request.user.pk)
@@ -30,7 +30,7 @@ class ToDoListView(LoginRequiredMixin, ListView):
 
 class ToDoDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = ToDo
-    template_name = "todo_detail.html"
+    template_name = "todos/todo_detail.html"
 
     def test_func(self):
         obj = self.get_object()
@@ -40,7 +40,7 @@ class ToDoDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 class ToDoCreateView(LoginRequiredMixin, CreateView):
     model = ToDo
     form_class = ToDoCreateForm
-    template_name = "todo_new.html"
+    template_name = "todos/todo_new.html"
     context_object_name = "todo_list"
     pk_url_kwarg = "todo_list_pk"
 
@@ -69,7 +69,7 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
 class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ToDo
     form_class = ToDoUpdateForm
-    template_name = "todo_edit.html"
+    template_name = "todos/todo_edit.html"
 
     def get_success_url(self):
         todo_list_pk = self.object.todo_list_id
@@ -82,7 +82,7 @@ class ToDoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class TodoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = ToDo
-    template_name = "todo_delete.html"
+    template_name = "todos/todo_delete.html"
 
     def get_success_url(self):
         todo_list_id = self.object.todo_list.id
@@ -119,7 +119,7 @@ def todo_reactivate(request, pk):
 
 class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = ToDoList
-    template_name = "todo_list_detail.html"
+    template_name = "todos/todo_list_detail.html"
     context_object_name = "todo_list"
     pk_url_kwarg = "pk"
 
@@ -153,7 +153,7 @@ class ToDoListDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 class ToDoListCreateView(LoginRequiredMixin, CreateView):
     model = ToDoList
     form_class = ToDoListCreateForm
-    template_name = "todo_list_new.html"
+    template_name = "todos/todo_list_new.html"
 
     def get_success_url(self):
         todo_list_pk = self.object.id
@@ -177,7 +177,7 @@ class ToDoListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class TodoListDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = ToDoList
-    template_name = "todo_list_delete.html"
+    template_name = "todos/todo_list_delete.html"
     success_url = reverse_lazy("todo_list")
 
     def test_func(self):
