@@ -25,25 +25,9 @@
     </div>
 </main>
 
-<footer class="py-3 mt-5 border-top bg-body-tertiary">
-    <div class="container d-flex flex-wrap align-items-center justify-content-between">
-        <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023-2024 John
-            Beers</p>
-        <a href="https://www.djangoproject.com/" target="_blank">
-            <img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif"
-                 alt="Made with Django." title="Made with Django.">
-        </a>
-        <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a
-                    href="https://codeberg.org/jaerrib/todo-list"
-                    class="nav-link px-2 text-body-secondary" target="_blank">View
-                the Source Code</a></li>
-            <li class="nav-item"><a href="{% url 'privacy-policy' %}"
-                                    class="nav-link px-2 text-body-secondary">Privacy
-                Policy</a></li>
-        </ul>
-    </div>
-</footer>
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
