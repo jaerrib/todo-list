@@ -33,10 +33,14 @@ django-gravatar2==1.4.5
     # via -r requirements.in
 environs[django]==11.0.0
     # via -r requirements.in
+gunicorn==23.0.0
+    # via -r requirements.in
 marshmallow==3.23.1
     # via environs
 packaging==24.2
-    # via marshmallow
+    # via
+    #   gunicorn
+    #   marshmallow
 psycopg2-binary==2.9.10
     # via -r requirements.in
 python-dotenv==1.0.1

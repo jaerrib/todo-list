@@ -1,8 +1,9 @@
 django>=5.0,<=5.2
 psycopg2-binary>=2.9.9
-environs[django=11.0.0
+environs[django]==11.0.0
 django-allauth>=65.0.0, <=66.0.0
 django-crispy-forms>=2.0
 crispy-bootstrap5>=2024.10
 django-gravatar2>=1.4.5
 whitenoise>=6.8.2, <7.0
+gunicorn>=23.0.0
