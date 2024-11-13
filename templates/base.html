@@ -3,87 +3,119 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ToDo List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous">
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
 </head>
 <body>
 
-<header class="py-1 mb-3 border-bottom bg-body-tertiary sticky-top">
+{% block header %}
+{% include "header.html" %}
+{% endblock header %}
+
+<main class="min-vh-100">
     <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="{% url 'home' %}" class="nav-link link-body-emphasis">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16">
-  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"/>
-</svg>
-            <span class="fw-bold ms-1 me-3">Eisenhower Prioritizer</span>
-        </a>
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        {% if user.is_authenticated %}
-            <li class="px-2 mt-2 mt-lg-0"><a href="{% url 'todo_list' %}" class="btn btn-sm btn-outline-dark">Manage my lists</a></li>
-            <li class="px-2 mt-2 mt-lg-0"><a href="{% url 'todo_list_new' %}" class="btn btn-sm btn-outline-success">Start a new list</a></li>
-        </ul>
-            <div class="dropdown text-end mt-2 mt-lg-0">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <title>User options</title>
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                </a>
-                <ul class="dropdown-menu text-small">
-                <li><span class="dropdown-item-text fw-bold">{{ user }}</span></li>
-                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
-                <li><a class="dropdown-item" href="{% url 'export_data' %}">Export My Data</a></li>
-                <li><a class="dropdown-item" href="{% url 'account_delete' pk=request.user.pk %}">Delete My Account</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit"  class="dropdown-item btn btn-success">Log Out</button>
-                    </form>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li class="dropdown-item text-secondary">Ver. 20241104</li>
-                </ul>
-            </div>
-        {% else %}
-        </ul>
-        <div class="text-end">
-            <a href="{%  url 'login' %}" class="btn btn-outline-success">Log In</a>
-            <a href="{% url 'signup' %}" class="btn btn-success">Register</a>
-        </div>
-        {% endif %}
-        </div>
+        {% block content %}
+        {% endblock content %}
     </div>
-</header>
+</main>
 
-    <main class="min-vh-100">
-        <div class="container">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    </main>
-
-    <footer class="py-3 mt-5 border-top bg-body-tertiary">
-        <div class="container d-flex flex-wrap align-items-center justify-content-between">
-            <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023-2024 John Beers</p>
-            <a href="https://www.djangoproject.com/" target="_blank">
-                <img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif" alt="Made with Django." title="Made with Django.">
-            </a>
-            <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a href="https://codeberg.org/jaerrib/todo-list" class="nav-link px-2 text-body-secondary" target="_blank">View the Source Code</a></li>
-            <li class="nav-item"><a href="{% url 'privacy-policy' %}" class="nav-link px-2 text-body-secondary">Privacy Policy</a></li>
-            </ul>
-        </div>
-    </footer>
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+<script>
+    /*!
+     * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
+     * Copyright 2011-2024 The Bootstrap Authors
+     * Licensed under the Creative Commons Attribution 3.0 Unported License.
+     */
+
+    (() => {
+        'use strict'
+
+        const getStoredTheme = () => localStorage.getItem('theme')
+        const setStoredTheme = theme => localStorage.setItem('theme', theme)
+
+        const getPreferredTheme = () => {
+            const storedTheme = getStoredTheme()
+            if (storedTheme) {
+                return storedTheme
+            }
+
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+
+        const setTheme = theme => {
+            if (theme === 'auto') {
+                document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        const showActiveTheme = (theme, focus = false) => {
+            const themeSwitcher = document.querySelector('#bd-theme')
+
+            if (!themeSwitcher) {
+                return
+            }
+
+            const themeSwitcherText = document.querySelector('#bd-theme-text')
+            const activeThemeIcon = document.querySelector('.theme-icon-active use')
+            const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+            const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
+
+            document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                element.classList.remove('active')
+                element.setAttribute('aria-pressed', 'false')
+            })
+
+            btnToActive.classList.add('active')
+            btnToActive.setAttribute('aria-pressed', 'true')
+            activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+            const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
+            themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
+
+            if (focus) {
+                themeSwitcher.focus()
+            }
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            const storedTheme = getStoredTheme()
+            if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                setTheme(getPreferredTheme())
+            }
+        })
+
+        window.addEventListener('DOMContentLoaded', () => {
+            showActiveTheme(getPreferredTheme())
+
+            document.querySelectorAll('[data-bs-theme-value]')
+                .forEach(toggle => {
+                    toggle.addEventListener('click', () => {
+                        const theme = toggle.getAttribute('data-bs-theme-value')
+                        setStoredTheme(theme)
+                        setTheme(theme)
+                        showActiveTheme(theme, true)
+                    })
+                })
+        })
+    })()
+</script>
+
+
 </body>
 </html>
