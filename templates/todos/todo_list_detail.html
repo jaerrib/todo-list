@@ -26,7 +26,7 @@
                 <hr>
                 <div class="d-grid gap-1">
                     {% for todo in do_list %}
-                    {% include "detail_partial.html" with todo=todo %}
+                    {% include "todos/detail_partial.html" with todo=todo %}
                     {% endfor %}
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <hr>
                 <div class="d-grid gap-1">
                     {% for todo in schedule_list %}
-                    {% include "detail_partial.html" with todo=todo %}
+                    {% include "todos/detail_partial.html" with todo=todo %}
                     {% endfor %}
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <hr>
                 <div class="d-grid gap-1">
                     {% for todo in delegate_list %}
-                    {% include "detail_partial.html" with todo=todo %}
+                    {% include "todos/detail_partial.html" with todo=todo %}
                     {% endfor %}
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 <hr>
                 <div class="d-grid gap-1">
                     {% for todo in eliminate_list %}
-                    {% include "detail_partial.html" with todo=todo %}
+                    {% include "todos/detail_partial.html" with todo=todo %}
                     {% endfor %}
                 </div>
             </div>
